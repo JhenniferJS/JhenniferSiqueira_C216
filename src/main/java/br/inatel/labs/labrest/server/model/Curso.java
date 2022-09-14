@@ -2,11 +2,11 @@ package br.inatel.labs.labrest.server.model;
 
 public class Curso {
 
-	private long id;
+	private Long id;
 	private String descricao;
 	private Integer cargaHoraria;
 	
-	public Curso(long id, String descricao, Integer cargaHoraria) {
+	public Curso(Long id, String descricao, Integer cargaHoraria) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -17,11 +17,11 @@ public class Curso {
 		super();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
