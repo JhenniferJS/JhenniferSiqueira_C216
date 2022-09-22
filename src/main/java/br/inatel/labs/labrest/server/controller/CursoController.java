@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.inatel.labs.labrest.server.exception.CursoNaoEncontradoException;
 import br.inatel.labs.labrest.server.model.Curso;
 import br.inatel.labs.labrest.server.service.CursoService;
 
@@ -41,8 +42,7 @@ public class CursoController {
 			return opCurso.get();
 		}
 		else {
-			String message = String.format("Nenhum curso encontrado com id [%s]", cursoId);
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
+			throw new CursoNaoEncontradoException(cursoId);
 		}
 	}
 	
@@ -58,14 +58,24 @@ public class CursoController {
 		return cursoCriado;
 	}
 	
-	@PutMapping
-	public void atualizar(@RequestBody Curso curso) {
+	@PutMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public void atualizar(@RequestBody Curso curso){
 		servico.atualizarCurso(curso);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void remover(@PathVariable("id") Long cursoId) {
-		servico.removerCursoPeloId(cursoId);
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void remove(@PathVariable("id") Long cursoIdParaRemover){
+		Optional<Curso> opCurso = servico.buscarCursoPeloId(cursoIdParaRemover);
+	
+		if(opCurso.isEmpty()) {
+			throw new CursoNaoEncontradoException(cursoIdParaRemover);
+		}
+		else {
+			Curso cursoASerRemovido = opCurso.get();
+			servico.removerCurso(cursoASerRemovido);
+		}
 	}
 
 }

@@ -53,6 +53,10 @@ public class CursoService {
 		listaDeCursos.add(curso);
 	}
 
+	public void removerCurso(Curso curso){
+		listaDeCursos.remove(curso);
+	}
+	
 	public void removerCursoPeloId(Long cursoId) {
 		Optional<Curso> opCurso = buscarCursoPeloId(cursoId);
 		if(opCurso.isPresent()) {
