@@ -82,6 +82,7 @@ public class CursoControllerTest {
 	@Test
 	void dadoCursoIdValido_quandoPutCurso_entaoRespondeComStatusAccept() {
 		Curso cursoValido = new Curso();
+		cursoValido.setId(5L);
 		cursoValido.setDescricao("SpringBoot Test");
 		cursoValido.setCargaHoraria(80);
 		
