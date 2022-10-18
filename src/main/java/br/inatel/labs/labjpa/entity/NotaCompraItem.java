@@ -13,6 +13,20 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class NotaCompraItem {
 
+	public NotaCompraItem() {
+		
+	}
+	
+	public NotaCompraItem(@NotNull BigDecimal valorCompraProduto, @NotNull Integer quantidade,
+			@NotNull NotaCompra notaCompra, @NotNull Produto produto) {
+		super();
+		this.valorCompraProduto = valorCompraProduto;
+		this.quantidade = quantidade;
+		this.notaCompra = notaCompra;
+		this.produto = produto;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

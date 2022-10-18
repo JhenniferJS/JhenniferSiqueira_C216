@@ -17,6 +17,15 @@ public class Fornecedor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	public Fornecedor() {
+		
+	}
+
+	public Fornecedor(@NotNull @NotBlank @Size(max = 200) String razaoSocial) {
+		super();
+		this.razaoSocial = razaoSocial;
+	}
 
 	public Long getId() {
 		return id;

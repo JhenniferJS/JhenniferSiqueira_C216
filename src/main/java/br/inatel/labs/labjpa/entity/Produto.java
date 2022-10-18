@@ -14,6 +14,15 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Produto {
+	
+	public Produto() {
+		
+	}
+
+	public Produto(@NotNull @NotBlank @Size(max = 100) String descricao) {
+		super();
+		this.descricao = descricao;
+	}
 
 	public Long getId() {
 		return id;
