@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.inatel.labs.labjpa.entity.NotaCompra;
 import br.inatel.labs.labjpa.entity.NotaCompraItem;
 import br.inatel.labs.labjpa.service.NotaCompraService;
 
@@ -22,6 +23,30 @@ public class LoadingDemo {
 			System.out.println(dataEmissao);
 			System.out.println("Aconteceu carregamento EAGER");
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void demoLazyLoading() {
+		try {
+			NotaCompra nota = service.buscarNotaCompraPeloId(1L);
+			int tamanho = nota.getListaNotaCompraItem().size();
+			
+			System.out.println(tamanho);
+		} catch (Exception e) {
+			System.out.println("O carregamento foi LAZY e por isso lançou exception");
+			e.printStackTrace();
+		}
+	}
+	
+	public void demoPlanejandoConsulta() {
+		try {
+			NotaCompra nota = service.buscarNotaCompraPeloIdComListaItem(1L);
+			int tamanho = nota.getListaNotaCompraItem().size();
+			
+			System.out.println(tamanho);
+		} catch (Exception e) {
+			System.out.println("O carregamento foi LAZY e por isso lançou exception");
 			e.printStackTrace();
 		}
 	}
